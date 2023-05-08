@@ -7,24 +7,58 @@
     <title>test01</title>
 </head>
 <body>
+
+    <button id="Attack_Button_my">나의 공격</button>
+    <button id="move_button">나의 이동</button>
+
+    <div>목표까지 : <span id="last_range">50</span> 칸</div>
+    <div>나의<span id="My_HP_point">100</span></div>
+    <div>적의<span id="enemy_HP_point">50</span></div>
+
     <script>
         let MyHP = 100;
-        let EnemyHP = 100;
+        let EnemyHP = 50;
+        let range = 50;
 
-        function calMyHp(){
-            EnemyAttackNumber = Math.floor(Math.random() * 10) + 1;
+        let AttackButtonMy = document.getElementById('Attack_Button_my')
+        let moveButton = document.getElementById('move_button')
+        let EnemyHPpoint = document.getElementById('enemy_HP_point')
+        let MyHPpoint = document.getElementById('My_HP_point')
+        let LastRange = document.getElementById('last_range')
+
+        AttackButtonMy.addEventListener('click', calHp)
+        moveButton.addEventListener('click', moveMap)
+
+        function calHp(){
+            let EnemyAttackNumber = Math.floor(Math.random() * 10) + 1;
+            let MyAttackNumber = Math.floor(Math.random() * 20) + 1;
+
             MyHP = MyHP - EnemyAttackNumber 
-            console.log(MyHP)
-        }
-
-        function calEnemyHp(){
-            MyAttackNumber = Math.floor(Math.random() * 20) + 1;
+            MyHPpoint.textContent = MyHP
             EnemyHP = EnemyHP - MyAttackNumber 
-            console.log(EnemyHP)
+            EnemyHPpoint.textContent = EnemyHP
+
+            if(EnemyHP <= 0){
+            EnemyHPpoint.textContent = '사망'
+            }
+            if(MyHP <= 0){
+            MyHPpoint.textContent = '사망'
+            }
         }
 
-        calMyHp();
-        calEnemyHp();
+        function moveMap(){
+            let MyStep = Math.floor(Math.random() * 30) + 1;
+            range = range - MyStep
+            LastRange.textContent = range
+            EnemyHP = 50;
+            EnemyHPpoint.textContent = EnemyHP
+            
+        }
+
+
+        
+       
+
         
     </script>
 </body>
